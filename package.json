@@ -12,7 +12,9 @@
     "database:prod": "heroku pg:psql -a build-4",
     "seed:prod": "heroku run knex seed:run -a build-4",
     "test": "cross-env NODE_ENV=testing jest --verbose --runInBand",
-    "deploy": "git push heroku main"
+    "deploy": "git push heroku main",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "engines": {
     "node": "16.13.2"
