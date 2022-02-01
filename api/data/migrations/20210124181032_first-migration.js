@@ -12,7 +12,6 @@ exports.up = async (knex) => {
         .integer('role_id')
         .unsigned()
         .notNullable()
-        .defaultTo('user')
         .references('role_id')
         .inTable('roles')
         .onUpdate('RESTRICT')
