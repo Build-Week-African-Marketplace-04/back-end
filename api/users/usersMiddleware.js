@@ -25,6 +25,19 @@ const only = (role) => (req, res, next) => {
   }
 };
 
+const checkUsernameFree = async (req, res, next) => {
+  try {
+    const [user] = await Users.findBy({ username: req.body.username });
+    if (user) {
+      next({ status: 401, message: 'Username taken' });
+    } else {
+      next();
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 const checkUsernameExists = async (req, res, next) => {
   try {
     const [user] = await Users.findBy({ username: req.body.username });
@@ -42,5 +55,6 @@ const checkUsernameExists = async (req, res, next) => {
 module.exports = {
   restricted,
   checkUsernameExists,
+  checkUsernameFree,
   only,
 };

@@ -2,7 +2,7 @@ const router = require('express').Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs/dist/bcrypt');
 const Users = require('./usersModel');
-const { checkUsernameExists } = require('./usersMiddleware');
+const { checkUsernameExists, checkUsernameFree } = require('./usersMiddleware');
 const { JWT_SECRET } = require('../secrets'); // use this secret!
 
 function generateToken(user) {
@@ -17,7 +17,7 @@ function generateToken(user) {
   return jwt.sign(payload, JWT_SECRET, options);
 }
 
-router.post('/signup', (req, res, next) => {
+router.post('/signup', checkUsernameFree, (req, res, next) => {
   let { username, password, role } = req.body;
   role === 'owner' ? (role = '1') : (role = '2'); // eslint-disable-line
   const hash = bcrypt.hashSync(password, 8);
