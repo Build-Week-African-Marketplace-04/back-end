@@ -3,9 +3,9 @@
 const db = require('../data/db-config');
 
 function find() {
-  return db('users')
-    .leftJoin('roles', 'users.role_id', 'role.role_id')
-    .select('user_id', 'username', 'role');
+  return db('items')
+    .leftJoin('categories', 'item.item_id', 'category.category_id')
+    .select('item_name', 'item_description', 'item_price', 'category');
 }
 
 // Category filter
@@ -24,11 +24,17 @@ function findById(user_id) { // eslint-disable-line
     .first();
 }
 
-async function add({ username, password, role }) {
-  return db('users').insert({ username, password, role_id: role }, [
-    'username',
-    'role_id',
-  ]);
+function add({
+  item_name,
+  item_description,
+  item_price,
+  category_id,
+  market_id,
+}) {
+  return db('items').insert(
+    { item_name, item_description, item_price, category_id, market_id }, // eslint-disable-line
+    ['item_name', 'item_description', 'item_price', 'category_id', 'market_id']
+  );
 }
 
 module.exports = {

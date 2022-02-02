@@ -21,7 +21,7 @@ function findById(user_id) { // eslint-disable-line
     .first();
 }
 
-async function add({ username, password, role }) {
+function add({ username, password, role }) {
   return db('users').insert({ username, password, role_id: role }, [
     'username',
     'role_id',

@@ -6,6 +6,7 @@
     "server": "nodemon index.js",
     "migrate:dev": "knex migrate:latest",
     "rollback:dev": "knex migrate:rollback",
+    "cleanup:dev" : "knex seed:run --specific=01-cleanup.js",
     "seed:dev": "knex seed:run",
     "migrate:prod": "heroku run knex migrate:latest -a build-4",
     "rollback:prod": "heroku run knex migrate:rollback -a build-4",
