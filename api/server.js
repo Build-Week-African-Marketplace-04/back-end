@@ -2,14 +2,14 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const usersRouter = require('./users/usersRouter');
-// const itemsRouter = require('./items/itemsRouter')
+const itemsRouter = require('./items/itemsRouter');
 
 const server = express();
 server.use(express.json());
 server.use(helmet());
 server.use(cors());
 
-// server.use("/api/items", itemsRouter);
+server.use('/api/items', itemsRouter);
 server.use('/api/users', usersRouter);
 
 server.use((err, req, res, next) => { // eslint-disable-line

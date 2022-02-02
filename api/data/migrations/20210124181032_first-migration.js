@@ -29,7 +29,7 @@ exports.up = async (knex) => {
       item.increments('item_id');
       item.string('item_name').notNullable();
       item.string('item_description');
-      item.integer('item_price').notNullable();
+      item.decimal('item_price').notNullable();
       item
         .integer('category_id')
         .unsigned()

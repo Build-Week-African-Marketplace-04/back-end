@@ -4,7 +4,7 @@ const db = require('../data/db-config');
 
 function find() {
   return db('items')
-    .leftJoin('categories', 'item.item_id', 'category.category_id')
+    .join('categories', 'items.item_id', 'categories.category_id')
     .select('item_name', 'item_description', 'item_price', 'category');
 }
 
